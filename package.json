@@ -1,0 +1,15 @@
+{
+  "name": "streaming-cdb",
+  "version": "1.0.0",
+  "description": "Stream CDB files using fetch requests with byte ranges",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Henry Stark <chocolatkey@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.8.3"
+  }
+}
