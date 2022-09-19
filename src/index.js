@@ -1,3 +1,9 @@
+
+/**
+ * CDB hash function
+ * @param {string} key Key to hash
+ * @returns {number} Hash
+ */
 export function cdbHash(key) {
     let hash = 5381,
         length = key.length;
@@ -15,8 +21,8 @@ export default class StreamingCDB {
      * @param {string} file URL of the CDB file to stream
      * @param {Function} hash Optional custom hash function to use
      */
-    constructor(file, hash=cdbHash) {
-        this.hash = hash;
+    constructor(file, hasher=cdbHash) {
+        this.hasher = hasher;
         this.file = file;
         this.header = new Array(TABLE_SIZE);
         this.cachedSlots = null;
@@ -64,7 +70,7 @@ export default class StreamingCDB {
      * @returns {Promise<Uint8Array>|null} The data corresponding to the key, or null if not found
      */
     async get(key) {
-        let hash = this.hash(key),
+        let hash = this.hasher(key),
             hashtableIndex = hash & 255,
             hashtable = this.header[hashtableIndex],
             position = hashtable.position,
